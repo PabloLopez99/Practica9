@@ -56,8 +56,7 @@ public class Conn {
         for (Map.Entry<String,List<String>> entry : bdd.entrySet()){
            aux.add(entry.getKey());
         }  
-          //  System.out.println("Key = " + entry.getKey() + 
-          //                   ", Value = " + entry.getValue()); 
+  
         return aux;
     } 
     public List<String> getRows(String Table){
