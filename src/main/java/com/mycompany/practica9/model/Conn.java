@@ -18,7 +18,7 @@ import java.util.logging.*;
  */
 public class Conn {
     private HashMap<String,List<String>> bdd;
-
+    private String pass;
     public Conn(String server,String bd, String user, String pass ) throws ClassNotFoundException, SQLException{
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection( "jdbc:mysql://"+server+"/"+bd+"?useSSL=true", user,
@@ -27,17 +27,13 @@ public class Conn {
         DatabaseMetaData md = con.getMetaData();
         String[] types = {"TABLE"};
         ResultSet rs = md.getTables(null, null, "%", types);
-        
+        this.pass=pass;
         
         while (rs.next()) {
-            String nombreTabla = rs.getString("TABLE_NAME"); System.out.println("Tabla: " + rs.getString("TABLE_NAME"));
+            String nombreTabla = rs.getString("TABLE_NAME");
             ResultSet rs2 = md.getColumns(null, null, nombreTabla, null);
-            
             List<String> aux= new LinkedList<>();
-          
             while (rs2.next()) {
-           
-            System.out.println(rs.getString("TABLE_NAME") +"."+rs2.getString("COLUMN_NAME"));
             aux.add(rs.getString("TABLE_NAME") +"."+rs2.getString("COLUMN_NAME"));
             }
             bdd.put(rs.getString("TABLE_NAME"), aux);
@@ -71,5 +67,9 @@ public class Conn {
             System.out.println(i);
             
         }
+    }
+
+    public String getUsername() {
+        return pass;
     }
 }

@@ -21,7 +21,6 @@ public class LoginFrame extends javax.swing.JFrame {
     private MainFrame mainFrame;
     public LoginFrame() {
         initComponents();
-        passwordTextField.setText("DIU-aed56-noi");
     }
 
     /**
@@ -47,8 +46,6 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel2.setText("Contraseña:");
 
         passwordTextField.setText("jPasswordField1");
-
-        usernameTextField.setText("estudiante-DIU");
 
         jLabel3.setText("Acceso al sistema");
 

@@ -5,6 +5,8 @@
  */
 package com.mycompany.practica9.model;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author pabloantoniolopezmartin
@@ -21,6 +23,7 @@ public class Handler {
            Conn conn = new Conn("mozart.dis.ulpgc.es","DIU_BD",username,String.valueOf(pass));
            return conn;
        }catch(Exception e){
+           JOptionPane.showMessageDialog(null, "Credenciales incorrectos \n"+e.getLocalizedMessage().substring(0,e.getLocalizedMessage().indexOf("'", 30)+1 ));
            return null;
        }
     }  
