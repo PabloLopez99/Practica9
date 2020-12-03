@@ -58,17 +58,17 @@ public class Conn {
     public List<String> getRows(String Table){
        return bdd.get(Table);
     }
-  
+
+/*
     public static void main(String[] args) throws ClassNotFoundException, SQLException{
         
         Conn conn= new Conn("mozart.dis.ulpgc.es","DIU_BD","estudiante-DIU","DIU-aed56-noi");
-        
         for (int i = 0; i < conn.getResponse().size(); i++) {
             System.out.println(i);
             
         }
     }
-
+*/
     public String getUsername() {
         return pass;
     }
