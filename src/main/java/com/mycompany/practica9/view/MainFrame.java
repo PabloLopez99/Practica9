@@ -10,27 +10,30 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
+import javax.swing.ListSelectionModel;
 
 /**
  *
  * @author pabloantoniolopezmartin
  */
 public class MainFrame extends javax.swing.JFrame {
-
-    /**
-     * Creates new form MainFrame
-     */
     private DefaultListModel tableModel=new DefaultListModel();
     private DefaultListModel rowModel=new DefaultListModel();
     private static Conn conn;
-    
+    private ButtonGroup bg;
     public MainFrame(Conn conn) {
         this.conn=conn;
         initComponents();
+        bg = new ButtonGroup();
+        bg.add(simpleButton);
+        bg.add(multipleButton);
+        bg.add(intervalButton);
         tableList.setModel(tableModel);
         rowList.setModel(rowModel);
         displayList();
+        simpleButton.setSelected(true);
         
     }
 
@@ -48,9 +51,9 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         authorsLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
-        jToggleButton3 = new javax.swing.JToggleButton();
+        simpleButton = new javax.swing.JToggleButton();
+        intervalButton = new javax.swing.JToggleButton();
+        multipleButton = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -106,11 +109,26 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Modo de selección"));
         jPanel2.setName(""); // NOI18N
 
-        jToggleButton1.setText("Simple");
+        simpleButton.setText("Simple");
+        simpleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simpleButtonActionPerformed(evt);
+            }
+        });
 
-        jToggleButton2.setText("Intervalo");
+        intervalButton.setText("Intervalo");
+        intervalButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                intervalButtonActionPerformed(evt);
+            }
+        });
 
-        jToggleButton3.setText("Múltiple");
+        multipleButton.setText("Múltiple");
+        multipleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                multipleButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -118,20 +136,20 @@ public class MainFrame extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(jToggleButton1)
+                .addComponent(simpleButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToggleButton2)
+                .addComponent(intervalButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jToggleButton3))
+                .addComponent(multipleButton))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton1)
-                    .addComponent(jToggleButton2)
-                    .addComponent(jToggleButton3))
+                    .addComponent(simpleButton)
+                    .addComponent(intervalButton)
+                    .addComponent(multipleButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -179,6 +197,18 @@ public class MainFrame extends javax.swing.JFrame {
         displayRowList();
     }//GEN-LAST:event_tableListMouseClicked
 
+    private void simpleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpleButtonActionPerformed
+        tableList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    }//GEN-LAST:event_simpleButtonActionPerformed
+
+    private void intervalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_intervalButtonActionPerformed
+       tableList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+    }//GEN-LAST:event_intervalButtonActionPerformed
+
+    private void multipleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multipleButtonActionPerformed
+       tableList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+    }//GEN-LAST:event_multipleButtonActionPerformed
+
     private void displayRowList(){
         List<String> list= new LinkedList<>();
         for (int i = 0; i < tableList.getSelectedValuesList().size(); i++) {
@@ -191,13 +221,13 @@ public class MainFrame extends javax.swing.JFrame {
     
     private void displayList(){
       tableList.setListData(conn.getTables().toArray(new String[0]));
-   
     }
     
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel authorsLabel;
+    private javax.swing.JToggleButton intervalButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -205,10 +235,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JToggleButton multipleButton;
     private javax.swing.JList<String> rowList;
+    private javax.swing.JToggleButton simpleButton;
     private javax.swing.JList<String> tableList;
     // End of variables declaration//GEN-END:variables
 }
